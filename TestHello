@@ -1,4 +1,3 @@
-print("Hello World")
 local Player = game:GetService("Players").LocalPlayer
 local RS = game:GetService("ReplicatedStorage")
 local PlayerGui = Player.PlayerGui
@@ -48,7 +47,7 @@ local function CreateGui ()
 	TeleportButton.Activated:Connect(function()
 		for i,Egg in pairs(workspace:WaitForChild("NPCS"):FindFirstChild("Pet Stand"):FindFirstChild("EggLocations"):GetChildren()) do
 			if Egg:IsA("Model") then
-				print(Egg.Name)
+				Player.Character.PrimaryPart.CFrame = Egg.PrimaryPart.CFrame
 			end
 		end
 	end)
