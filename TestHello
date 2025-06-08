@@ -33,6 +33,11 @@ local function CreateGui ()
 	CloseButton.TextScaled = true
 	CloseButton.Size = UDim2.new(0.25,0,0.25,0)
 	CloseButton.Position = UDim2.new(0.75,0,0,0)
+	CloseButton.TextColor3 = Color3.fromRGB(135, 255, 108)
+	
+	CloseButton.Activated:Connect(function()
+		screengui:Destroy()
+	end)
 
 	local TeleportButton = Instance.new("TextButton")
 	TeleportButton.Parent = MainFrame
@@ -40,14 +45,19 @@ local function CreateGui ()
 	TeleportButton.Text = "Teleport"
 	TeleportButton.Name = "Teleport"
 	TeleportButton.TextScaled = true
-	TeleportButton.Font = Enum.Font.GothamBold  local CloneUiStroke = UiStroke:Clone() CloneUiStroke.Parent = CloseButton
+		TeleportButton.TextColor3 = Color3.fromRGB(135, 255, 108)
+	TeleportButton.Font = Enum.Font.GothamBold  local CloneUiStroke = UiStroke:Clone() CloneUiStroke.Parent = TeleportButton
 	TeleportButton.Position = UDim2.new(0,0,0.37,0)
 	TeleportButton.Size = UDim2.new(0.463,0,0.25,0)
 	
 	TeleportButton.Activated:Connect(function()
 		for i,Egg in pairs(workspace:WaitForChild("NPCS"):FindFirstChild("Pet Stand"):FindFirstChild("EggLocations"):GetChildren()) do
-			if Egg:IsA("Model") then
-				Player.Character.PrimaryPart.CFrame = Egg.PrimaryPart.CFrame
+			if Egg:IsA("Model") and Egg.Name ~= "CommonEgg"or Egg.Name ~= "UncommonEgg" then
+				for i,Folder in pairs(RS:GetChildren()) do
+					if Folder:IsA("Folder") and Folder.Name == "GameEvents" then
+							Folder:FindFirstChild("Sell_Inventory"):FireServer(Player)
+					end
+				end
 			end
 		end
 	end)
